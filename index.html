@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소리 재생 버튼</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+        }
+        .button {
+            width: 7cm;
+            height: 5cm;
+            background-color: yellow;
+            border: none;
+            cursor: pointer;
+            margin: 3cm 0; /* 상하 간격 */
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 3cm; /* 좌우 간격 */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 버튼 -->
+    <button class="button" onclick="playSound('C:\\1homepage\\dog1.mp3')">상단 버튼</button>
+
+    <!-- 하단 버튼들 -->
+    <div class="button-container">
+        <button class="button" onclick="playSound('C:\\1homepage\\dog2.mp3')">왼쪽 버튼</button>
+        <button class="button" onclick="playSound('C:\\1homepage\\trumpet.mp3')">가운데 버튼</button>
+        <button class="button" onclick="playSound('C:\\1homepage\\water.mp3')">오른쪽 버튼</button>
+    </div>
+
+    <!-- 다음 페이지로 가는 화살표 -->
+    <button class="button" onclick="goToNextPage()">다음 페이지로 가기</button>
+
+    <script>
+        function playSound(filePath) {
+            const audio = new Audio(filePath);
+            audio.play();
+        }
+
+        function goToNextPage() {
+            window.location.href = '다음페이지.html'; // 다음 페이지 주소를 입력하세요
+        }
+    </script>
+</body>
+</html>

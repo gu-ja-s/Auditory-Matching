@@ -1,0 +1,51 @@
+import tkinter as tk
+import os
+import winsound
+
+# 소리 재생 함수 (WAV 파일로만 가능)
+def play_sound(file_path):
+    if os.path.exists(file_path):
+        winsound.PlaySound(file_path, winsound.SND_FILENAME)
+
+# 이전 페이지/다음 페이지로 넘어가기
+def previous_page():
+    print("이전 페이지로 넘어갑니다.")  # 페이지 전환 로직을 추가하세요
+
+def next_page():
+    print("다음 페이지로 넘어갑니다.")  # 페이지 전환 로직을 추가하세요
+
+# 메인 윈도우 설정
+root = tk.Tk()
+root.title("Sound Button App")
+root.geometry("800x600")  # 화면 크기 설정
+
+# 상단 버튼
+top_button = tk.Button(root, width=20, height=10, bg='yellow', command=lambda: play_sound("C:\\1homepage\\dog1.wav"))
+top_button.pack(pady=(20, 10))  # 상단 여백 설정
+
+# 하단 버튼 프레임
+bottom_frame = tk.Frame(root)
+bottom_frame.pack(side=tk.BOTTOM, pady=(10, 20))
+
+# 하단 버튼
+bottom_buttons = [
+    ("C:\\1homepage\\dog2.wav"),
+    ("C:\\1homepage\\trumpet.wav"),
+    ("C:\\1homepage\\water.wav"),
+]
+
+for i in range(3):
+    btn = tk.Button(bottom_frame, width=20, height=10, bg='yellow', command=lambda file=bottom_buttons[i]: play_sound(file))
+    btn.grid(row=0, column=i, padx=5)  # 버튼 간격 설정
+
+# 화살표 버튼
+arrow_frame = tk.Frame(root)
+arrow_frame.pack(pady=(10, 0))
+
+prev_button = tk.Button(arrow_frame, text="<", command=previous_page)
+prev_button.grid(row=0, column=0)
+
+next_button = tk.Button(arrow_frame, text=">", command=next_page)
+next_button.grid(row=0, column=1)
+
+root.mainloop()

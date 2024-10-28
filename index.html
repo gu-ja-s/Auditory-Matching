@@ -32,23 +32,22 @@
 </head>
 <body>
 
-    <!-- 상단 버튼 -->
     <button class="button" onclick="playSound('C:\\1homepage\\dog1.mp3')">상단 버튼</button>
 
-    <!-- 하단 버튼들 -->
     <div class="button-container">
         <button class="button" onclick="playSound('C:\\1homepage\\dog2.mp3')">왼쪽 버튼</button>
         <button class="button" onclick="playSound('C:\\1homepage\\trumpet.mp3')">가운데 버튼</button>
         <button class="button" onclick="playSound('C:\\1homepage\\water.mp3')">오른쪽 버튼</button>
     </div>
 
-    <!-- 다음 페이지로 가는 화살표 -->
     <button class="button" onclick="goToNextPage()">다음 페이지로 가기</button>
 
     <script>
         function playSound(filePath) {
             const audio = new Audio(filePath);
-            audio.play();
+            audio.play().catch(function(error) {
+                console.error("소리 재생 오류:", error);
+            });
         }
 
         function goToNextPage() {

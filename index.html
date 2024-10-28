@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>버튼 소리 재생</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+        }
+        .button {
+            width: 7cm;
+            height: 5cm;
+            background-color: yellow;
+            border: none;
+            cursor: pointer;
+            margin: 0.5cm 0; /* 간격을 0.5cm로 조정 */
+        }
+        .bottom-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 0.5cm; /* 상하좌우 간격 조정 */
+        }
+        .bottom-buttons .button {
+            margin: 0 0.5cm; /* 간격을 0.5cm로 조정 */
+        }
+    </style>
+</head>
+<body>
+
+    <button class="button" id="topButton"></button>
+
+    <div class="bottom-buttons">
+        <button class="button" id="bottomButton1"></button>
+        <button class="button" id="bottomButton2"></button>
+        <button class="button" id="bottomButton3"></button>
+    </div>
+
+    <script>
+        const topButton = document.getElementById('topButton');
+        const bottomButton1 = document.getElementById('bottomButton1');
+        const bottomButton2 = document.getElementById('bottomButton2');
+        const bottomButton3 = document.getElementById('bottomButton3');
+
+        topButton.addEventListener('click', () => {
+            const audio = new Audio('file:///C:/1homepage/dog1.mp3');
+            audio.play();
+        });
+
+        bottomButton1.addEventListener('click', () => {
+            const audio = new Audio('file:///C:/1homepage/dog2.mp3');
+            audio.play();
+        });
+
+        bottomButton2.addEventListener('click', () => {
+            const audio = new Audio('file:///C:/1homepage/trumpet.mp3');
+            audio.play();
+        });
+
+        bottomButton3.addEventListener('click', () => {
+            const audio = new Audio('file:///C:/1homepage/water.mp3');
+            audio.play();
+        });
+    </script>
+</body>
+</html>

@@ -26,15 +26,15 @@ bottom_frame.pack(side=tk.BOTTOM, pady=(10, 20))
 
 bottom_button1 = tk.Button(bottom_frame, text="버튼 1", width=20, height=5, bg="yellow",
                            command=lambda: play_sound(r"C:\1homepage\dog2.wav"))
-bottom_button1.pack(side=tk.LEFT, padx=5)
+bottom_button1.pack(side=tk.LEFT, padx=20)
 
 bottom_button2 = tk.Button(bottom_frame, text="버튼 2", width=20, height=5, bg="yellow",
                            command=lambda: play_sound(r"C:\1homepage\trumpet.wav"))
-bottom_button2.pack(side=tk.LEFT, padx=5)
+bottom_button2.pack(side=tk.LEFT, padx=20)
 
 bottom_button3 = tk.Button(bottom_frame, text="버튼 3", width=20, height=5, bg="yellow",
                            command=lambda: play_sound(r"C:\1homepage\water.wav"))
-bottom_button3.pack(side=tk.LEFT, padx=5)
+bottom_button3.pack(side=tk.LEFT, padx=20)
 
 # 화살표 버튼
 arrow_button = tk.Button(root, text="다음 페이지", command=next_page)

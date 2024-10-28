@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Button App</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            background-color: white;
+        }
+        .button {
+            width: 7cm;
+            height: 5cm;
+            background-color: yellow;
+            border: none;
+            margin: 0.3cm;
+            cursor: pointer;
+        }
+        .top-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 버튼 -->
+    <button class="button top-button" onclick="playSound('dog1.mp3')"></button>
+
+    <!-- 하단 버튼 -->
+    <div>
+        <button class="button" onclick="playSound('dog2.mp3')"></button>
+        <button class="button" onclick="playSound('trumpet.mp3')"></button>
+        <button class="button" onclick="playSound('water.mp3')"></button>
+    </div>
+
+    <!-- 화살표 버튼 -->
+    <div>
+        <button onclick="previousPage()">◀</button>
+        <button onclick="nextPage()">▶</button>
+    </div>
+
+    <script>
+        function playSound(soundFile) {
+            const audio = new Audio(`C:/1homepage/${soundFile}`);
+            audio.play().catch(error => {
+                console.error('소리 재생 중 오류 발생:', error);
+            });
+        }
+
+        function previousPage() {
+            console.log('이전 페이지로 넘어갑니다.');  // 페이지 전환 로직 추가
+        }
+
+        function nextPage() {
+            console.log('다음 페이지로 넘어갑니다.');  // 페이지 전환 로직 추가
+        }
+    </script>
+
+</body>
+</html>

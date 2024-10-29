@@ -47,13 +47,13 @@
 <body>
 
     <div class="top-buttons">
-        <button class="button" onclick="playSound('https://github.com/gu-ja-s/Auditory-Matching/blob/main/dog1.wav')"></button>
+        <button class="button" onclick="playSound(soundUrls.dog1)"></button>
     </div>
 
     <div class="bottom-buttons">
-        <button class="button" onclick="playSound('https://github.com/gu-ja-s/Auditory-Matching/blob/main/dog1.wav')"></button>
-        <button class="button" onclick="playSound('https://github.com/gu-ja-s/Auditory-Matching/blob/main/trumpet.wav')"></button>
-        <button class="button" onclick="playSound('https://github.com/gu-ja-s/Auditory-Matching/blob/main/water.wav')"></button>
+        <button class="button" onclick="playSound(soundUrls.dog1)"></button>
+        <button class="button" onclick="playSound(soundUrls.trumpet)"></button>
+        <button class="button" onclick="playSound(soundUrls.water)"></button>
     </div>
 
     <div class="arrow-buttons">
@@ -62,19 +62,23 @@
     </div>
 
     <script>
+        const soundUrls = {
+            dog1: 'https://raw.githubusercontent.com/gu-ja-s/Auditory-Matching/main/dog1.wav',
+            trumpet: 'https://raw.githubusercontent.com/gu-ja-s/Auditory-Matching/main/trumpet.wav',
+            water: 'https://raw.githubusercontent.com/gu-ja-s/Auditory-Matching/main/water.wav',
+        };
+
         function playSound(url) {
             const audio = new Audio(url);
             audio.play();
         }
 
         function previousPage() {
-            // 이전 페이지로 이동하는 코드
-            alert('이전 페이지로 이동합니다.'); // 실제 페이지 이동 코드로 변경 필요
+            alert('이전 페이지로 이동합니다.');
         }
 
         function nextPage() {
-            // 다음 페이지로 이동하는 코드
-            alert('다음 페이지로 이동합니다.'); // 실제 페이지 이동 코드로 변경 필요
+            alert('다음 페이지로 이동합니다.');
         }
     </script>
 

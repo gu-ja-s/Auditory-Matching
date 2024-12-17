@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditory Matching 7</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+        }
+        .button {
+            width: 9cm;
+            height: 8cm;
+            background-image: url("https://raw.github.com/gu-ja-s/Auditory-Matching/main/blue.png");
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            margin: 0.2cm;
+        }
+        .top-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .arrow-button {
+            width: 0.75cm;
+            height: 0.75cm;
+            background-color: gray;
+            border: none;
+            cursor: pointer;
+            margin: 0.2cm;
+            font-size: 20px;
+        }
+        .page-number {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        #topButton {
+            background-image: url("https://raw.githubusercontent.com/gu-ja-s/Auditory-Matching/main/blue1.png");
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-buttons">
+        <button class="button" id="topButton1"></button>
+        <button class="button" id="topButton2"></button>
+    </div>
+
+    <button class="button" id="bottomButton"></button>
+
+    <div class="controls">
+        <button class="arrow-button" id="prevPage">◀</button>
+        <span class="page-number" id="currentPageNumber">1</span>
+        <button class="arrow-button" id="nextPage">▶</button>
+    </div>
+
+    <script>
+        const pages = [
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/swim.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/clock.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/clock.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/chair.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/swim.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/swim.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/paper.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/chair.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/swim.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/chair.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/clock.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/chair.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/paper.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/ju.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/swim.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bag.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/paper.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pen.wav"
+            },
+            {
+                topSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/clock.wav"
+                ],
+                bottomSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/bus.wav"
+            }
+        ];
+
+        let currentPage = 0;
+
+        function playSound(url) {
+            const audio = new Audio(url);
+            audio.play();
+        }
+
+        function updatePage() {
+            const current = pages[currentPage];
+            document.getElementById('topButton1').onclick = () => playSound(current.topSounds[0]);
+            document.getElementById('topButton2').onclick = () => playSound(current.topSounds[1]);
+            document.getElementById('bottomButton').onclick = () => playSound(current.bottomSound);
+            document.getElementById('currentPageNumber').textContent = currentPage + 1;
+        }
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePage();
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updatePage();
+            }
+        });
+
+        // 초기 페이지 설정
+        updatePage();
+    </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditory Matching 4</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+        }
+        .button {
+            width: 9cm;
+            height: 8cm;
+            background-size: contain;
+            background-repeat: no-repeat; 
+            background-position: center; 
+            border: none;
+            cursor: pointer;
+            margin: 0.2cm;
+        }
+        .bottom-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .arrow-button {
+            width: 0.75cm;
+            height: 0.75cm;
+            background-color: gray;
+            border: none;
+            cursor: pointer;
+            margin: 0.2cm;
+            font-size: 20px;
+        }
+        .page-number {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bottom-buttons">
+        <button class="button" id="bottomButton1"></button>
+        <button class="button" id="bottomButton2"></button>
+    </div>
+
+    <button class="button" id="topButton"></button>
+
+    <div>
+        <button class="arrow-button" id="prevPage">◀</button>
+        <span class="page-number" id="currentPageNumber">1</span>
+        <button class="arrow-button" id="nextPage">▶</button>
+    </div>
+
+    <script>
+        const pages = [
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ho.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/dudu.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ho.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/so.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/so.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/dudu.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/dudu.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/so.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/dudu.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ho.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/so.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ho.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ho.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/dudu.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/duck.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/tiger.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ho.gif'
+                ]
+            },
+            {
+                topSound: "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                bottomSounds: [
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.wav",
+                    "https://raw.github.com/gu-ja-s/Auditory-Matching/main/pipi.wav"
+                ],
+                topImage: 'https://raw.github.com/gu-ja-s/Auditory-Matching/main/cow.gif',
+                bottomImages: [
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/so.gif',
+                    'https://raw.github.com/gu-ja-s/Auditory-Matching/main/ari.gif'
+                ]
+            }
+        ];
+
+        let currentPage = 0;
+
+        // 페이지 업데이트 함수
+        function updatePage() {
+            const current = pages[currentPage];
+            
+            // 상단 버튼 이미지 및 사운드 설정
+            document.getElementById('topButton').style.backgroundImage = `url('https://raw.github.com/gu-ja-s/Auditory-Matching/main/blue.png')`;
+            document.getElementById('topButton').onclick = () => playSound(current.topSound);
+
+            // 하단 버튼 이미지 및 사운드 설정
+            document.getElementById('bottomButton1').style.backgroundImage = `url(${current.bottomImages[0]})`;
+            document.getElementById('bottomButton1').onclick = () => playSound(current.bottomSounds[0]);
+
+            document.getElementById('bottomButton2').style.backgroundImage = `url(${current.bottomImages[1]})`;
+            document.getElementById('bottomButton2').onclick = () => playSound(current.bottomSounds[1]);
+
+            // 페이지 번호 표시
+            document.getElementById('currentPageNumber').textContent = currentPage + 1;
+        }
+
+        // 사운드 재생 함수
+        function playSound(url) {
+            const audio = new Audio(url);
+            audio.play();
+        }
+
+        // 이전 페이지 버튼 클릭 시
+        document.getElementById('prevPage').onclick = () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePage();
+            }
+        };
+
+        // 다음 페이지 버튼 클릭 시
+        document.getElementById('nextPage').onclick = () => {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updatePage();
+            }
+        };
+
+        // 페이지 초기화
+        updatePage();
+    </script>
+</body>
+</html>
